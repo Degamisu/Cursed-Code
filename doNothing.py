@@ -1,6 +1,12 @@
 class TaskManager:
-    def __init__(self):
-        self.tasks = []
+from typing import List
+
+class ClassName:
+    def __init__(self) -> None:
+        """
+        Initialize an instance of ClassName.
+        """
+        self.tasks: List[Task] = []
 
     def add_task(self, task):
         self.tasks.append(task)
@@ -10,14 +16,22 @@ class TaskManager:
         for task in self.tasks:
             task()
 
-def do_nothing():
+def do_nothing() -> None:
+    """
+    This function does nothing.
+
+    Returns:
+        None
+    """
     pass
 
-def do_nothing_twice():
+def do_nothing_twice() -> None:
+    # Executes something
     do_nothing()
     do_nothing()
 
-def do_nothing_with_style():
+def do_nothing_with_style() -> None:
+    # Executes literally nothing
     print("Executing stylish something...")
     do_nothing()
 
