@@ -6,7 +6,7 @@ class TaskManager:
         self.tasks.append(task)
 
     def execute_tasks(self):
-        print("Executing tasks:")
+        print("Executing something:")
         for task in self.tasks:
             task()
 
