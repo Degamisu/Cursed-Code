@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Real-Time System Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+</head>
+
+<body>
+    <h1>Real-Time System Details</h1>
+    <canvas id="systemGraph"></canvas>
+
+    <script>
+        // Function to generate random data for the graph
+        function generateData() {
+            var data = [];
+            var labels = [];
+            for (var i = 0; i < 10; i++) {
+                data.push(Math.floor(Math.random() * 100));
+                labels.push((i + 1).toString());
+            }
+            return { data, labels };
+        }
+
+        // Create a new chart using Chart.js
+        var ctx = document.getElementById('systemGraph').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: generateData().labels,
+                datasets: [{
+                    label: 'System Details',
+                    data: generateData().data,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Update the graph every second
+        setInterval(function () {
+            chart.data.datasets[0].data = generateData().data;
+            chart.update();
+        }, 1000);
+    </script>
+</body>
+
+</html>
