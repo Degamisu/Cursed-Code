@@ -26,19 +26,47 @@
     <canvas id="fractalCanvas" width="800" height="600"></canvas>
     
     <script>
-        function drawFractal() {
-            var canvas = document.getElementById("fractalCanvas");
-            var ctx = canvas.getContext("2d");
-            
-            var iterations = parseInt(document.getElementById("iterations").value);
-            var scale = parseFloat(document.getElementById("scale").value);
-            var angle = parseFloat(document.getElementById("angle").value);
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Fractal drawing code goes here
-            
+    function drawFractal() {
+        var canvas = document.getElementById("fractalCanvas");
+        var ctx = canvas.getContext("2d");
+
+        var iterations = parseInt(document.getElementById("iterations").value);
+        var scale = parseFloat(document.getElementById("scale").value);
+        var angle = parseFloat(document.getElementById("angle").value);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Fractal drawing code
+        drawKochSnowflake(ctx, iterations, scale, angle);
+    }
+
+    function drawKochSnowflake(ctx, iterations, scale, angle) {
+        // Base case: if iterations reach 0, draw a line segment
+        if (iterations === 0) {
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(canvas.width, 0);
+            ctx.stroke();
+        } else {
+            // Recursive case: divide the line segment into 4 smaller segments
+            var segmentLength = canvas.width / Math.pow(scale, iterations);
+            var segmentHeight = segmentLength * Math.sin(angle * Math.PI / 180);
+
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.rotate(-angle * Math.PI / 180);
+
+            // Draw the four smaller segments
+            for (var i = 0; i < 4; i++) {
+                drawKochSnowflake(ctx, iterations - 1, scale, angle);
+                ctx.translate(segmentLength, 0);
+                ctx.rotate(-60 * Math.PI / 180);
+            }
+
+            ctx.restore();
         }
+    }
+
     </script>
 </body>
 </html>
