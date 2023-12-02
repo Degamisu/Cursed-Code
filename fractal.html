@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fractal Generator</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fractal Generator</h1>
+    <form>
+        <label for="iterations">Iterations:</label>
+        <input type="number" id="iterations" name="iterations" min="1" max="10" value="5"><br><br>
+        
+        <label for="scale">Scale:</label>
+        <input type="number" id="scale" name="scale" min="1" max="10" value="2"><br><br>
+        
+        <label for="angle">Angle:</label>
+        <input type="number" id="angle" name="angle" min="0" max="360" value="60"><br><br>
+        
+        <button type="button" onclick="drawFractal()">Generate Fractal</button>
+    </form>
+    
+    <canvas id="fractalCanvas" width="800" height="600"></canvas>
+    
+    <script>
+        function drawFractal() {
+            var canvas = document.getElementById("fractalCanvas");
+            var ctx = canvas.getContext("2d");
+            
+            var iterations = parseInt(document.getElementById("iterations").value);
+            var scale = parseFloat(document.getElementById("scale").value);
+            var angle = parseFloat(document.getElementById("angle").value);
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Fractal drawing code goes here
+            
+        }
+    </script>
+</body>
+</html>
